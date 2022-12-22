@@ -16,7 +16,7 @@ class Mailgun:
     MAILGUN_API_KEY = os.environ.get("MAILGUN_API_KEY", None)
     MAILGUN_DOMAIN = os.environ.get("MAILGUN_DOMAIN", None)
 
-    FROM_TITLE = "TEST"
+    FROM_TITLE = "Stores REST API"
     FROM_EMAIL = f"do-not-reply@{MAILGUN_DOMAIN}"
 
     @classmethod
@@ -40,8 +40,7 @@ class Mailgun:
                 "html": html,
             },
         )
-        
-        print(response.status_code)
+
         if response.status_code != 200:
             raise MailGunException(ERROR_SENDING_EMAIL)
 
