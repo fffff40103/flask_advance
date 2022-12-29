@@ -28,6 +28,15 @@ class Mailgun:
 
         if cls.MAILGUN_DOMAIN is None:
             raise MailGunException(FAILED_LOAD_DOMAIN)
+        data={
+            "from": f"{cls.FROM_TITLE} <{cls.FROM_EMAIL}>",
+            "to": email,
+            "subject": subject,
+            "text": text,
+            "html": html,
+        }
+
+        print(data)
 
         response = post(
             f"https://api.mailgun.net/v3/{cls.MAILGUN_DOMAIN}/messages",
@@ -39,6 +48,7 @@ class Mailgun:
                 "text": text,
                 "html": html,
             },
+            
         )
 
         if response.status_code != 200:
